@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="ulwrapper"></ul>
+    <script>
+        // 二维数组转一维
+        function test1(arr) {
+            return arr.flat(Infinity)
+        }
+        // 递归
+        function test2(arr) {
+            return [].concat(...arr.map(x => Array.isArray(x) ? test2(x) : x))
+        }
+        let arr = [1, 2, [3, 4], 5, 6]
+        let rest = test1(arr)
+        let rest2 = test2(arr)
+
+        console.log(rest, 'rest');
+        console.log(rest2, 'rest2');
+        // 算术
+        function Multiplication() {
+            for (let i = 1; i <= 9; i++) {
+                for (let j = 1; j <= i; j++) {
+                    document.write(j + '*' + i + '=' + i * j + '&nbsp;&nbsp;&nbsp');
+                }
+                document.write('<br/>')
+            }
+        }
+        Multiplication()
+        // 排序 该方法返回的是一个数字用来表示一个参考字符串和对比字符串是排序在前，在后或者相同。
+        function sortArray(time, view) {
+            let obj = [
+                { id: 1, value: "value1", date: "2018-08-08", time: "15:27:17" },
+                { id: 2, value: "value2", date: "2018-08-09", time: "12:27:17" },
+                { id: 3, value: "value3", date: "2018-08-10", time: "17:27:17" },
+                { id: 4, value: "value4", date: "2018-08-10", time: "01:27:17" },
+                { id: 5, value: "value5", date: "2018-08-10", time: "09:27:17" },
+                { id: 6, value: "value6", date: "2018-08-10", time: "23:27:17" },
+                { id: 7, value: "value7", date: "2018-08-10", time: "16:27:17" },
+                { id: 8, value: "value8", date: "2018-08-11", time: "10:27:17" }
+
+            ]
+            let index = obj.findIndex(it => it.time == time)
+            if (index != -1) {
+                obj[index].view = view
+            } else {
+                obj.push({ id: new Date().getTime(), value: `value9`, date: "2019-08-11", 'time': time, 'view': view })
+                // js提供了字符串的对比方法localeCompare()，该方法返回的是一个数字用来表示一个参考字符串和对比字符串是排序在前，在后或者相同
+                console.log(obj, 'obj')
+                obj.sort((a, b) => a.time.localeCompare(b.time) || b.time.localeCompare(a.time)
+                )
+            }
+            return obj
+        }
+        let rest3 = sortArray('09:20:17', 30)
+        // let rest4=sortArray('8:30',8)
+        console.log(rest3, 'rest3')
+        // console.log(rest4,'rest4')
+        ///数组对象添加新属性、
+
+        let arrObj = [{ name: "小明", Gender: "男", age: 22, }, { name: "小李", Gender: "男", age: 12 }, { name: "小红", Gender: "女", age: 19 }, { name: "小方", Gender: "女", age: 20 }]
+        function addfilter(arr, key, value, obj) {
+            // arr.forEach(element => {
+            //    if(element[key]==value){
+            //     element=Object.assign(element,obj)
+            //    } 
+            // });
+            let one = arr.find(element => {
+                if (element[key] == value) {
+                    element = Object.assign(element, obj)
+                }
+            });
+            // return arr
+            return one
+
+
+        }
+        let rest5 = addfilter(arrObj, 'Gender', '男', { 'Marriage': '未婚' })
+        console.log(rest5, 'rest5')
+        // 数组交集
+        var arr1 = [1, 2, 3, 4, 5, 6, "a", "b"]
+        var arr2 = ['a', 'b', 1, 2]
+        var arr3 = arr1.filter(item => {
+            return arr2.includes(item)
+        })
+        console.log(arr3, 'arr3')
+        // 一百以内奇数和
+        function qiNumber(){
+            let num=0
+            for(let i=1;i<101;i++){
+                if(i%2!=0){
+                    num+=i
+                }
+            }
+            return num
+        }
+        let rest6=qiNumber()
+        console.log(rest6,'rest6')
+        // 一个5升 一个6升 如何称3升水
+        // 1. 6 升盛满 倒入5升的-剩余1升
+        // 2 5升瓶清空 导入一升水（6升剩余的）然后 在6升盛满 导入5升水壶，剩余 2升
+        // 3 把5升壶清空 把6升水壶（剩余的2升水）导入5升水壶（剩余3升空间）
+        // 4 
+    </script>
+</body>
+
+</html>
